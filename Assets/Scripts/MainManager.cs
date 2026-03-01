@@ -18,6 +18,8 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
+    public Text bestScoreText;
+
     
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,8 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+
+        DisplayPlayerName();
     }
 
     private void Update()
@@ -60,6 +64,20 @@ public class MainManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
+    }
+
+    void DisplayPlayerName()
+    {
+        // Ambil nama dari PlayerPrefs
+        string playerName = PlayerPrefs.GetString("PlayerName", "Player");
+
+        // Tampilkan di UI
+        if (bestScoreText != null)
+        {
+            bestScoreText.text = "Best Score : " + playerName + " : ";
+        }
+
+        Debug.Log("Welcome, " + playerName);
     }
 
     void AddPoint(int point)
